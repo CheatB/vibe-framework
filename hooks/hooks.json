@@ -1,0 +1,150 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "description": "📍 Контекст-инжекция — git, проект, Docker, Nemp при старте",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/session-start.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "description": "🔒 Security Scan — блокирует SQLi, XSS, secrets",
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/security-scan.sh"
+          }
+        ]
+      },
+      {
+        "description": "🛡️ Защита .env и приватных ключей",
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/protect-secrets.sh"
+          }
+        ]
+      },
+      {
+        "description": "💾 Backup Before Edit — бэкап перед изменением",
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/backup-before-edit.sh"
+          }
+        ]
+      },
+      {
+        "description": "💥 Destructive Guard — блокирует rm -rf, DROP TABLE",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/destructive-guard.sh"
+          }
+        ]
+      },
+      {
+        "description": "📝 Conventional Commit — формат коммит-сообщения",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/conventional-commit.sh"
+          }
+        ]
+      },
+      {
+        "description": "🔀 Branch Guard — блок push в main (opt-in через .branch-guard)",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/branch-guard.sh"
+          }
+        ]
+      },
+      {
+        "description": "⚠️ Tmux для долгих команд",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -E '(npm install|cargo build|pytest|pnpm install|yarn install)' > /dev/null; then echo '{\"systemMessage\": \"⚠️ Долгая команда — рекомендую tmux.\"}'; fi"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "description": "🎨 Prettier для JS/TS",
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // .tool_input.path // empty' | xargs -I {} sh -c 'echo \"{}\" | grep -qE \"\\.(js|jsx|ts|tsx)$\" && npx prettier --write \"{}\" 2>/dev/null || true'"
+          }
+        ]
+      },
+      {
+        "description": "🐍 Ruff lint+format для Python",
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/python-lint.sh"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "description": "🔄 Re-inject контекста после compaction",
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/reinject-context.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "description": "🔍 Проверка на debug-код",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git diff --cached --name-only 2>/dev/null | while read file; do if [ -f \"$file\" ] && grep -n 'console\\.log\\|debugger' \"$file\" 2>/dev/null; then echo '{\"systemMessage\": \"⚠️ console.log/debugger в staged файлах!\"}'; break; fi; done"
+          }
+        ]
+      },
+      {
+        "description": "📊 Cost tracker — запись сессии",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/cost-tracker.sh"
+          }
+        ]
+      },
+      {
+        "description": "🔔 Desktop notification",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/notify-done.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
