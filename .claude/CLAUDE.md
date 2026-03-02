@@ -22,6 +22,7 @@
 │   ├── coding-standards.md  # DRY, KISS, YAGNI, TDD, размеры файлов
 │   ├── automation.md        # Auto-fix pipeline (4 уровня), pre/post hooks
 │   ├── security.md          # Секреты, валидация, CORS, rate limiting
+│   ├── infrastructure.md   # Карта VPS, SSH, деплой-пайплайн
 │   ├── workflow-markers.md  # Визуальные маркеры этапов
 │   └── skill-quality-gate.md # Проверка качества скиллов
 ├── commands/                 # Slash-команды
@@ -50,6 +51,7 @@
 4. **Auto-Fix** — 4 уровня автоисправления (commit → push → CI → deploy). Макс 3 попытки. → rules/automation.md
 5. **Workflow маркеры** — визуальные маркеры этапов (РЕЖИМ → ФАЗА → ЧЕКПОИНТ → ГОТОВО). → rules/workflow-markers.md
 6. **Бизнес-анализ** — 5 блоков в Фазе 1.8: Legal, Monetization, GTM, Analytics, Accessibility. → commands/business-analysis.md
+7. **Инфраструктура** — 6 VPS (1 dev + 5 prod), деплой через SSH с dev-server. → rules/infrastructure.md
 
 ## Ключевые команды
 
