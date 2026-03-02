@@ -1,4 +1,4 @@
-# Claude Desktop — Vibe Framework v2
+# Claude Desktop — Vibe Framework v4.1
 
 ## Язык
 - Весь код, комментарии, docstrings, переменные — на русском
@@ -28,12 +28,18 @@
 │   ├── new-project.md       # /new-project — полный pipeline создания проекта
 │   ├── end.md               # /end — завершение рабочей сессии
 │   ├── done.md              # /done — завершение фичи (+ обновление Project Knowledge)
+│   ├── business-analysis.md # /business-analysis — standalone бизнес-анализ
 │   ├── code-review.md       # /code-review
 │   ├── tdd.md               # /tdd
 │   └── ...
 └── skills/user/              # Кастомные скиллы
     ├── aiogram-bot/          # Telegram боты на Aiogram v3
-    └── telegram-post-style/  # Посты для канала "Не просто Чел"
+    ├── telegram-post-style/  # Посты для канала "Не просто Чел"
+    ├── legal-compliance/     # Юридическая проверка (ПД, оферта, 152-ФЗ)
+    ├── monetization/         # Модель монетизации
+    ├── gtm/                  # Go-to-Market стратегия
+    ├── analytics-setup/      # Метрики и аналитика (AARRR)
+    └── accessibility/        # Доступность веб-интерфейсов (a11y)
 ```
 
 ## Ключевые правила (подробности в rules/)
@@ -43,10 +49,12 @@
 3. **TDD** — сначала тест, потом код. Минимум 80% покрытия. → rules/coding-standards.md
 4. **Auto-Fix** — 4 уровня автоисправления (commit → push → CI → deploy). Макс 3 попытки. → rules/automation.md
 5. **Workflow маркеры** — визуальные маркеры этапов (РЕЖИМ → ФАЗА → ЧЕКПОИНТ → ГОТОВО). → rules/workflow-markers.md
+6. **Бизнес-анализ** — 5 блоков в Фазе 1.8: Legal, Monetization, GTM, Analytics, Accessibility. → commands/business-analysis.md
 
 ## Ключевые команды
 
-- **/new-project** — от идеи до рабочего продукта. Определение размера S/M/L → brainstorming → user-spec → tech-spec → tasks → код → деплой.
+- **/new-project** — от идеи до рабочего продукта. Определение размера S/M/L → brainstorming → бизнес-анализ (Фаза 1.8) → user-spec → tech-spec → tasks → код → деплой.
+- **/business-analysis** — standalone бизнес-анализ (5 блоков: Legal, Monetization, GTM, Analytics, Accessibility).
 - **/end** — конец рабочей сессии. AI_NOTES + session log + tasks.md + git commit/push.
 - **/done** — фича завершена. Всё из /end + обновление Project Knowledge + архивация артефактов.
 
