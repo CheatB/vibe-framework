@@ -1,0 +1,18 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Секреты
+.env
+.env.local
+.env.*.local
+
+# Временные файлы
+*.tmp
+*.swp
+*~
+.fuse_hidden*
+
+# IDE
+.vscode/
+.idea/
