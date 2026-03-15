@@ -103,6 +103,16 @@
             "command": "~/.claude/hooks/scripts/python-lint.sh"
           }
         ]
+      },
+      {
+        "description": "🎨 Design Token Check — блокирует хардкодные цвета в UI-файлах [v5.1]",
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/scripts/check-design-tokens.sh \"$CLAUDE_TOOL_INPUT_FILE_PATH\" \"$(pwd)\""
+          }
+        ]
       }
     ],
     "Notification": [
