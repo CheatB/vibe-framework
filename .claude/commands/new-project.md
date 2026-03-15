@@ -453,6 +453,42 @@
 
 ---
 
+## ФАЗА 3.2: Design System (только если has_ui: true)
+
+> **Триггер:** Tech-Spec содержит UI-компоненты, фронтенд или `has_ui: true`
+> Если проект без UI (API, бот, скрипт) — **пропустить фазу**.
+
+### Шаги
+
+**Шаг 1: Design Spec** (скилл: `design-spec`)
+Запустить скилл и провести AI-интервью (12 вопросов в 4 блоках):
+- 📐 Идентичность: тон, аудитория, референсы
+- 🎨 Визуальная система: цвета, типографика, радиусы
+- 🧩 Компоненты: кнопки, формы, карточки, навигация
+- ⚙️ Технические ограничения: CSS-фреймворк, анимации
+
+Результат: `docs/design-spec.md` + `docs/.design-answers.json`
+
+**Шаг 2: Design Tokens** (скилл: `design-tokens`)
+На основе design-spec сгенерировать:
+- `src/styles/tokens.css` — CSS Custom Properties (цвета, типографика, spacing)
+- `src/styles/tokens.json` — W3C Design Tokens format
+- `src/styles/global.css` — глобальные стили с токенами
+
+**Шаг 3: UI Kit Map** (скилл: `ui-kit`)
+Составить Component Map L0-L4 (Tokens → Atoms → Molecules → Organisms → Templates).
+Источники по приоритету: 21st.dev → shadcn/ui → UIverse → Radix UI → с нуля.
+
+Результат: `docs/ui-kit.md` + `docs/design-tasks.md`
+
+### Git commit
+
+После создания: `git commit -m "feat(design): design-spec, tokens, ui-kit"`
+
+**✅ Контрольная точка: дизайн-система готова. Все UI-компоненты определены, токены созданы.**
+
+---
+
 ## ФАЗА 3.5: Создание Project Knowledge
 
 На основе согласованного tech-spec создать "живые" документы проекта (обновляются после каждой фичи через `/done`):
