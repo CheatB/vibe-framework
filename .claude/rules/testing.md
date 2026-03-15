@@ -110,8 +110,9 @@ expect(корзина.товары).toHaveLength(1)
 ## Покрытие
 
 - Минимум **80%** покрытия для бизнес-логики
-- Тесты для всех публичных функций
+- Тесты для всех публичныхфункций
 - Edge cases покрыты
+
 - Не гнаться за 100% — фокус на ценности теста
 
 ## Адаптивность по размеру задачи
@@ -122,3 +123,53 @@ expect(корзина.товары).toHaveLength(1)
 | Unit | если есть логика | ✅ | ✅ |
 | Integration | — | ✅ (если API/БД) | ✅ |
 | E2E | — | по запросу | ✅ (критичные) |
+
+---
+
+## Рекомендуемый стек по типу проекта
+
+### Python
+
+| Инструмент | Роль |
+|-----------|------|
+| `pytest` | runner |
+| `pytest-asyncio` | async-тесты (aiogram, FastAPI) |
+| `pytest-cov` | покрытие (`--cov=. --cov-report=term-missing`) |
+| `pytest-mock` | моки через `mocker.patch` |
+| `httpx` | HTTP-клиент в тестах (async-совместимый) |
+| `respx` | мок httpx-запросов (`responses` не работает с async) |
+| `Faker` | генерация тестовых данных |
+| `testcontainers` | реальный Postgres/Redis в Docker на время теста |
+| `pytest-django` | если Django: фикстуры, test client |
+
+**Запуск:** `pytest --cov=. --cov-report=term-missing`
+
+### TypeScript / Node.js
+
+| Инструмент | Роль |
+|-----------|------|
+| `vitest` | runner (быстрее Jest, нативный ESM) |
+| `@vitest/coverage-v8` | покрытие (`vitest run --coverage`) |
+| `@testing-library/react` | компонентные тесты — поведение, не реализация |
+| `@testing-library/user-event` | симуляция кликов, ввода, фокуса |
+| `supertest` | HTTP-тесты Express/Fastify без запуска сервера |
+| `msw` | мок fetch/XHR на уровне service worker |
+| `@faker-js/faker` | генерация тестовых данных |
+| `testcontainers` | реальный Postgres/Redis в Docker на время теста |
+
+**Запуск:** `npx vitest run --coverage`
+
+### E2E
+
+| Инструмент | Роль |
+|-----------|------|
+| `@playwright/test` | кросс-браузер, скриншоты и видео при падении |
+| `@axe-core/playwright` | a11y-проверки прямо в E2E тестах |
+
+**Запуск:** `npx playwright test`
+
+Playwright при падении сохраняет скриншот и трейс — Claude читает их и понимает причину без доступа к браузеру.
+
+### Не используем и почему
+
+`Jest` → Vitest быстрее и совместим с Jest API. `Cypress` → Playwright быстрее и мощнее. `k6/Locust` → нагрузочное тестирование — отдельная дисциплина. `Pact` → contract testing нишевое, не нужно соло-проектам.
