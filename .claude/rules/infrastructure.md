@@ -21,91 +21,91 @@
 | Параметр | Значение |
 |----------|----------|
 | MCP-тул | `mcp__vps-dev-server__exec` |
-| Hostname | cmiioiydtb |
+| Hostname | <YOUR_HOSTNAME> |
 | ОС | Ubuntu 24.04 |
 | Пользователь | claude |
 | Роль | Разработка, CI/CD runners, инфра-сервисы |
 
 **Что живёт:**
-- GitHub Actions self-hosted runners (6 шт.): project-app-bot-main, project-app-bot-server, project-5, project-2, project-3, project-1
+- GitHub Actions self-hosted runners (6 шт.): runner-1, runner-2, runner-3, runner-4, runner-5, runner-6
 - Obsidian CouchDB (синхронизация заметок)
 - SearXNG (поисковый движок)
 - Uptime Kuma (мониторинг доступности)
-- Project2ibe dev-инстанс (для тестирования)
-- ProjectApp исходники (Gradle-проект)
+- Project-2 dev-инстанс (для тестирования)
+- Project-4 исходники (Gradle-проект)
 - Claude Framework (`~/.claude/` + `~/claude-config/`)
 
 **SSH-ключи к остальным VPS:** `~/.ssh/id_ed25519` + конфиг в `~/.ssh/config`
 
 ---
 
-### vps-main — Project1
+### vps-project-1 — Project-1
 
 | Параметр | Значение |
 |----------|----------|
-| MCP-тул | `mcp__vps-main__exec` |
-| Hostname | hoycyrlmat |
+| MCP-тул | `mcp__vps-project-1__exec` |
+| Hostname | <YOUR_HOSTNAME> |
 | IP | <YOUR_SERVER_IP> |
 | ОС | Ubuntu 22.04 |
 | Пользователи | claude, deploy |
-| Роль | Продакшен Project1 |
+| Роль | Продакшен Project-1 |
 
-**Что живёт:** Project1 (API + Worker на systemd, без Docker)
+**Что живёт:** Project-1 (API + Worker на systemd, без Docker)
 **Путь проекта:** `/home/deploy/project-1` (деплой) + `/home/claude/project-1` (копия)
 **Деплой:** `git pull` → `deploy_backend.sh` → `deploy_frontend.sh` → systemd restart
 
-**Особенность:** Docker установлен, но у пользователя `claude` нет прав на docker socket. Project1 работает через systemd, не через Docker.
+**Особенность:** Docker установлен, но у пользователя `claude` нет прав на docker socket. Project-1 работает через systemd, не через Docker.
 
 ---
 
-### project-4 — ProjectApp
+### project-4 — Project-4
 
 | Параметр | Значение |
 |----------|----------|
 | MCP-тул | `mcp__vps-project-4__exec` |
-| Hostname | jodfxbzqic |
+| Hostname | <YOUR_HOSTNAME> |
 | IP | <YOUR_SERVER_IP> |
 | ОС | Ubuntu 24.04 |
 | Пользователь | claude |
-| Роль | Продакшен ProjectApp |
+| Роль | Продакшен Project-4 |
 
 **Что живёт (Docker):**
-- project-app-bot-main (Telegram-бот)
-- project-app-bot-server (сервер)
+- project-4-bot-main (Telegram-бот)
+- project-4-bot-server (сервер)
 - tbank-proxy (прокси платежей)
-- project-app-postgres
-- project-app-redis
+- project-4-postgres
+- project-4-redis
 - Watchdog-скрипты (event, payment, proxy)
 
 **Особенность:** Docker установлен, но у пользователя `claude` нет прав. Деплой через runner на dev-server.
 
 ---
 
-### project-5 — Project5
+### project-5 — Project-5
 
 | Параметр | Значение |
 |----------|----------|
 | MCP-тул | `mcp__vps-project-5__exec` |
-| Hostname | pyodmbnajm |
+| Hostname | <YOUR_HOSTNAME> |
 | IP | <YOUR_SERVER_IP> |
 | ОС | Ubuntu 24.04 |
 | Пользователь | claude |
-| Роль | Продакшен Project5 |
+| Роль | Продакшен Project-5 |
 
-**Что живёт (Docker):** SearXNG (часть функционала Project5)
+**Что живёт (Docker):** SearXNG (часть функционала Project-5)
 
 ---
 
-### aware-anton — Project3ory
+### vps-project-3 — Project-3
 
 | Параметр | Значение |
 |----------|----------|
-| MCP-тул | `mcp__vps-aware-anton__exec` |
-| Hostname | content-factory-vps |
+| MCP-тул | `mcp__vps-vps-project-3__exec` |
+| Hostname | <YOUR_HOSTNAME> |
 | IP | <YOUR_SERVER_IP> |
 | ОС | Ubuntu 24.04 |
 | Пользователь | claude |
-| Роль | Продакшен Project3ory |
+| Роль | Продакшен Project-3 |
 
 **Что живёт (Docker):**
 - project-3-nginx (reverse proxy)
@@ -118,16 +118,16 @@
 
 ---
 
-### wholehearted-igor — Project2ibe
+### vps-project-2 — Project-2
 
 | Параметр | Значение |
 |----------|----------|
-| MCP-тул | `mcp__vps-wholehearted-igor__exec` |
-| Hostname | web-page-cheatb-vibe |
+| MCP-тул | `mcp__vps-vps-project-2__exec` |
+| Hostname | <YOUR_HOSTNAME> |
 | IP | <YOUR_SERVER_IP> |
 | ОС | Ubuntu 24.04 |
 | Пользователь | claude |
-| Роль | Продакшен Project2ibe |
+| Роль | Продакшен Project-2 |
 
 **Что живёт (Docker):**
 - project-2-app
@@ -145,17 +145,16 @@
                      │ SSH (~/.ssh/id_ed25519)
         ┌────────────┼────────────────┬──────────────┐
         │            │                │              │
-   ┌────▼────┐  ┌────▼─────┐  ┌──────▼─────┐  ┌────▼────┐  ┌────────────┐
-   │ project-1  │  │whynotmon │  │  project-5   │  │ aware-  │  │wholeheart- │
-   │ :42.135 │  │ :98.220  │  │  :98.230   │  │ anton   │  │  ed-igor   │
-   │ Project1  │  │ProjectApp│  │  Project5   │  │Project3.│  │Project2. │
-   └─────────┘  └──────────┘  └────────────┘  └─────────┘  └────────────┘
+   ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐
+   │project-1 │  │project-4 │  │project-5 │  │project-3 │  │project-2 │
+   │ PROD #1  │  │ PROD #4  │  │ PROD #5  │  │ PROD #3  │  │ PROD #2  │
+   └──────────┘  └──────────┘  └──────────┘  └──────────┘  └──────────┘
 ```
 
 SSH-конфиг на dev-server (`~/.ssh/config`):
 - Все хосты доступны по алиасам: `ssh project-1`, `ssh project-4`, `ssh project-5`, `ssh project-3`, `ssh project-2`
 - Единый ключ `~/.ssh/id_ed25519` для всех продакшен-серверов
-- Отдельный ключ `~/.ssh/github_dev-server` для GitHub
+- Отдельный ключ `~/.ssh/github_key` для GitHub
 
 ---
 
@@ -198,14 +197,14 @@ SSH-конфиг на dev-server (`~/.ssh/config`):
 | project-1 | project-1 | /home/deploy/project-1 |
 | project-2 | project-2 | /home/claude/project-2 |
 | project-5 | project-5 | /home/claude/project-5 |
-| project-app (project-4) | project-4 | /home/claude/project-app |
+| project-4 (project-4) | project-4 | /home/claude/project-4 |
 | project-3 | project-3 | /home/claude/project-3 |
 
 ### Health checks
 
 После деплоя автоматически проверяются:
 - project-1: `http://localhost:8000/health`
-- project-4 (project-app): `http://localhost:8080/health`
+- project-4 (project-4): `http://localhost:8080/health`
 - project-3: `http://localhost:8000/health`
 
 Если health check не проходит за 5 попыток (15 сек) → автоматический rollback.
@@ -282,8 +281,8 @@ sync.sh копирует файлы из репо в `~/.claude/` (CLAUDE.md, co
 | project-1 | <YOUR_SERVER_IP> |
 | project-4 | <YOUR_SERVER_IP> |
 | project-5 | <YOUR_SERVER_IP> |
-| aware-anton | <YOUR_SERVER_IP> |
-| wholehearted-igor | <YOUR_SERVER_IP> |
+| vps-project-3 | <YOUR_SERVER_IP> |
+| vps-project-2 | <YOUR_SERVER_IP> |
 
 ---
 

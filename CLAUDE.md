@@ -1,7 +1,7 @@
 # Глобальные правила Claude Code
 
 ## Кто я
-Автор (@CheatB), вайбкодер, GMT+7, macOS.
+@CheatB, вайбкодер, GMT+7, macOS.
 Создаю приложения с помощью нейросетей. Python, Node.js, TypeScript.
 
 ## Язык и стиль
@@ -33,33 +33,28 @@
 dev-server = dev-hub (все репо, Claude CLI, CI/CD), остальные VPS = только прод.
 Клиент: VSCode + Remote-SSH, workspace: ~/all-projects.code-workspace
 
-### Серверы (Beget VPS)
+### Серверы (VPS)
 | Хост | IP | Роль | Путь |
 |------|-----|------|------|
 | dev-server | <YOUR_SERVER_IP> | DEV: все проекты, runners | ~/ |
-| project-1 | <YOUR_SERVER_IP> | PROD: Project1 | /home/deploy/project-1 |
-| project-2 | <YOUR_SERVER_IP> | PROD: Project2ibe | /home/claude/project-2 |
-| project-3 | <YOUR_SERVER_IP> | PROD: Vibe Factory | /home/claude/project-3 |
-| project-4 | <YOUR_SERVER_IP> | PROD: ProjectApp | /home/claude/project-app |
-| project-5 | <YOUR_SERVER_IP> | PROD: Project5 | /home/claude/project-5 |
+| server-1 | <YOUR_SERVER_IP> | PROD: Project 1 | /home/deploy/project-1 |
+| server-2 | <YOUR_SERVER_IP> | PROD: Project 2 | /home/claude/project-2 |
+| server-3 | <YOUR_SERVER_IP> | PROD: Project 3 | /home/claude/project-3 |
+| server-4 | <YOUR_SERVER_IP> | PROD: Project 4 | /home/claude/project-4 |
+| server-5 | <YOUR_SERVER_IP> | PROD: Project 5 | /home/claude/project-5 |
 
 ### Claude CLI на dev-server
 Каждый проект в отдельной tmux-сессии.
 - Запуск: `dev` (алиас ~/start-all.sh)
 - Флаги: `--max --continue --dangerously-skip-permissions`
-- Алиасы: z sv db oc gr vf
 
 ### CI/CD
-- 7 GitHub self-hosted runners на dev-server
+- GitHub self-hosted runners на dev-server
 - Push в main -> runner -> SSH-деплой на прод
 - Ручной: `~/deploy-all.sh [сервер] [--dry-run] [--rollback]`
 
-### Бэкап секретов
-- Cron 3:00: .env с dev+prod, AES256, -> CheatB/secrets-backup (private)
-- Скрипты: ~/backup-secrets.sh, ~/restore-secrets.sh
-
 ### SSH-ключи
-- Мак -> VPS: ~/.ssh/vps_master (ed25519)
+- Локальная машина -> VPS: ~/.ssh/vps_master (ed25519)
 - dev-server -> прод: ~/.ssh/id_ed25519
 
 
@@ -75,7 +70,7 @@ dev-server = dev-hub (все репо, Claude CLI, CI/CD), остальные VP
 - Stop: проверка staged на console.log/debugger
 
 ### SSH-алиасы (из ~/.ssh/config)
-project-1, project-2, project-3, project-5, project-4
+server-1, server-2, server-3, server-4, server-5
 
 ## Agent Teams
 Каталог ролей в AGENTS.md.

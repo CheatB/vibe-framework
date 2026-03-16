@@ -79,7 +79,7 @@ cd vibe-framework && ./sync.sh
 
 ## Автор
 
-**Автор** (@CheatB) — вайбкодер, менеджер в IT
+@CheatB — вайбкодер, менеджер в IT
 
 - Telegram: [Не просто Чел](https://t.me/cheatb_channel)
 - Project2ibe: [project-2.ru](https://project-2.ru)
