@@ -727,7 +727,7 @@ ELSE → пропустить, перейти к Фазе 3
 ```
 Фаза 2.5
     ├── Этап A: Design Spec  (skill: design-spec)
-    │       └── Опросник 12 вопросов → docs/design-spec.md
+    │       └── ui-ux-pro-max DB + 4-5 вопросов → docs/design-spec.md
     ├── Этап B: Design Tokens  (skill: design-tokens)
     │       └── src/styles/tokens.css + tokens.json + global.css
     └── Этап C: UI Kit  (skill: ui-kit)
@@ -736,7 +736,7 @@ ELSE → пропустить, перейти к Фазе 3
 
 #### Этап A: Design Spec (skill: design-spec)
 
-12 вопросов в 4 блоках: **Идентичность** (тон, аудитория, брендбук) → **Визуальная система** (цвета, dark mode, типографика) → **Компоненты** (референсы, иконки, анимации) → **Ограничения** (breakpoints, a11y, запреты).
+Запускает **ui-ux-pro-max** (5 DB-поисков: product/style/color/typography/ux) → предлагает топ-3 рекомендации → задаёт 4-5 точечных вопросов.
 
 Результат: `docs/design-spec.md`
 
@@ -788,7 +788,6 @@ ELSE → пропустить, перейти к Фазе 3
 - [ ] `src/styles/tokens.json` валиден (W3C формат)
 - [ ] `docs/ui-kit.md` — Component Map всего проекта
 - [ ] `docs/design-tasks.md` готов к Фазе 3
-- [ ] `.design-answers.json` в `.gitignore`
 - [ ] Dark mode токены добавлены (если включён)
 - [ ] `prefers-reduced-motion` обработан
 
@@ -2395,14 +2394,14 @@ Escape-клапан: `/* vibe-ignore */` над строкой.
 | Компонент | Тип | Описание |
 |-----------|-----|----------|
 | Фаза 2.5: Дизайн-система | Новая фаза | Авто-запуск для UI между Tech Spec и декомпозицией |
-| `skill: design-spec` | Новый скилл | 12-вопросный опросник → `docs/design-spec.md` |
+| `skill: design-spec` | Новый скилл | ui-ux-pro-max DB + 4-5 вопросов → `docs/design-spec.md` |
 | `skill: design-tokens` | Новый скилл | CSS Custom Properties + W3C JSON из design-spec |
 | `skill: ui-kit` | Новый скилл | Каталог компонентов (Atoms→Templates) + design-tasks |
 | `rules/design.md` | Новое правило | BLOCK: никаких hex-кодов, inline-стилей, font-family в коде |
 | `check-design-tokens.sh` | Новый хук | PostToolUse: BLOCK хардкод-цветов, WARN magic-numbers |
 | Design Enforcement | Расширение VR | 4 новые дизайн-проверки в enforcement-пайплайне |
 | Фаза 2.5: Дизайн-система | Новая фаза | Авто-запуск для UI между Tech Spec и декомпозицией |
-| skill: design-spec | Новый скилл | 12-вопросный опросник -> docs/design-spec.md |
+| skill: design-spec | Новый скилл | ui-ux-pro-max DB + 4-5 вопросов -> docs/design-spec.md |
 | skill: design-tokens | Новый скилл | CSS Custom Properties + W3C JSON из design-spec |
 | skill: ui-kit | Новый скилл | Каталог Atoms->Templates + design-tasks.md |
 | rules/design.md | Новое правило | BLOCK: hex-коды, inline-стили, font-family в коде |
